@@ -1,0 +1,250 @@
+InstructionUnion_extracts_parts_correctly
+	Makes sure that each respecitive part is pulled from
+	the integer correctly.
+
+makeWord_works_properly
+	Makes sure that the proper integer is created from the 
+	associaed four bytes.
+
+Program_loads_the_file_correctly
+	Ensures that after the program has loaded the file
+	that the memory is correct. It does this by
+	loading a four byte file with the bytes ABCD
+
+Program_after_fetch_has_the_value_of_0x44434241_in_mbr
+	Ensures that when the program runs that the mbr
+	has the proper value associated with it after
+	fetch is called.
+
+Program_fetch_increments_PC
+	Ensures that the PC is incremented after a fetch
+	call is made.
+
+Program_does_the_addi_correctly_and_first_sets_t0_to_0_then_sets_it_to_1
+	Ensures that the PC is incremented. 
+	Ensures that register t0 has the value of 0 at first.
+	Ensures that register t0 has the value of 1 after the addi
+
+Program_does_addi_correctly_with_negative_number
+	Ensures that addi performs addition correctly
+	with a negative number.
+
+Program_does_R_type_instruction_correctly
+	Ensures that R type instructions work
+	correctly. In this case testing nand.
+
+Program_does_I_sw_correctly
+	Ensures that sw stores the value in memory at
+	location 2.
+
+Program_does_I_lw_correctly
+	Ensures that lw retreives the correct value and
+	places it into the correct register.
+
+Program_does_jarl_correctly
+	Ensures that register y has the return address 
+	correctly stored in it and that PC is equal to
+	register x.
+
+Program_does_unconditional_zero_equals_zero_correctly
+	Unconditional beq to the address 44.
+
+Program_does_unconditional_t0_not_equal_t1
+	Ensures that the branch to the next instruction is done
+	when the two registers are not equal.
+
+Program_does_proper_unconditional_beq_with_negative_offset
+	Ensures that beq works with a negative offset.
+
+Program_collects_input_correctly
+	Ensures that input is collected and parsed correctly.
+	The value 100 is used to test this.
+	
+Program_outputs_correctly
+	Ensures that the value 99, which is the value of sp,
+	is printed out to the screen.
+
+Program_runs_a_complete_program
+	Runs a complete program.
+
+Shell_parses_and_executes_step_correctly
+	Ensures that when passed the command `step` that the PC
+	is incremented.
+
+Shell_parses_and_exeuctes_step_with_num_steps_parameter
+	Ensures that when there is a parameter to `step` passed
+	it will step that many times.
+
+Shell_parses_and_executes_mem_correctly
+	Ensures that the memory is printed.
+
+Shell_parses_and_executes_cpu_correctly
+	Ensures that the cpu is printed.
+
+Shell_parses_and_executes_instr_correctly
+	Ensures that the instr is printed.
+
+Shell_parses_and_executes_run_correctly
+	Ensures that the program is run when the `run` command
+	is sent.
+
+ForkShell_properly_sends_command_across_pipe
+	Ensures that when something is sent across the pipe it is in the correct
+	format.
+
+ForkShell_waits_for_the_child_process_to_send_a_response_when_it_expects_one
+	Ensures that the child process can gain shell control when it
+	is able to get it.
+
+	Create a dummy mock process class to perform this so that it will 
+	wait for the specific commands.
+
+MemoryManager_allocates_memory_properly
+	Ensures that the MemoryManager can allocate the memory
+	properly.
+
+MemoryManager_allocates_a_block_of_memory_correctly
+	Ensures that when memory is allocated that the
+	free list is updated accordingly. The address
+	returned is correct.
+
+MemoryManager_can_not_find_free_block_of_sutiable_size
+	Ensures that if the first allocation is too large
+	for the current memory size a -1 is returned as the
+	address of memory.
+
+MemoryManager_finds_the_most_suitable_memory_location_for_new_allocations
+	Ensures that as the memory becomes fragmented it will
+	try to find a block of best fit.
+
+	The setup involves the following:
+		First the memory size is set to 50 words.
+		The first allocation will be of 10 words.
+		The second allocation will be of 10 words.
+		The first allocation will be for 5 words.
+		The second allocation will be freed thus leaving
+		a 10 word hole between the first and third allocation.
+		Then a forth allocation will be taken of 10 words.
+			This allocation address should be where the
+			second allocation was.
+
+MemoryManager_combines blocks correctly_on_a_free
+	Ensures that fragmented blocks are combined correctly
+	so as to try and minimize the memory fragmentation.
+
+	The setup involves the following:
+		First the memory size is set to 50 words.
+		The first allocation is of 10 words.
+		The second allocation is of 10 words.
+		The third allocation is of 10 words.
+		
+		Then the second allocation is free'd and
+		the free list should not have be collapsed with
+		the final 20 words,susequently the third 
+		allocation is also free'd the free list
+		should contain a single free block that will
+		go from the base address of the second block
+		all the way through to 50 words.
+		free block that contains 
+
+ProcessGroup_loads_a_program_and_adds_it_to_read_queue
+	Ensures that when a program is added to a Process group it
+	is added to the ready queue.
+
+ProcessGroup_runs_a_program_it_does_so_for_the_specified_time_slice
+	Ensures that the currently running program only executes
+	for as long as the timeslice. `performTicks` method is called.
+
+ProcessGroup_correctly_goes_through_the_ready_queue
+	Ensures that when the current process is done with
+	its timeslice it goes to the end of the queue and
+	the next program in the ready queue is being
+	executed.
+
+ProcessGroup_makes_the_properly_formatted_messages_to_ensure_that_programs_get_their_commands
+	Ensures that when a program has shell access it will only send 
+	shell input to that specific program.
+
+	Ensures that if a `kill` or `fg` command is performed
+	it will act on the proper program.
+
+ProcessGroup_ensures_that_the_program_is_running_if_it_is_put_into_the_background
+	Ensures that when a program is told to run in the background by using
+	the `&` parameter it will have it's `background` flag set to `true`.
+
+ProcessGroup_make_sure_that_when_a_program_needs_input_and_it_is_in_the_background_it_is_moved_to_the_io_queue
+	Ensures that when a program is told to run in the background, but needs input it is
+	moved to the io queue and then if it does not have shell control it will then
+	be moved to the waiting queue.
+
+ProcessGroup_when_the_simulator_is_suspended_the_IP_of_the_current_program_should_not_change
+	Ensures that the `performTicks` method is not called when the simulator is 
+	suspended.
+
+ProcessGroup_will_gracefully_handle_the_situation_where_there_is_too_little_memory_for_a_new_process
+	Ensures that the program does not crash by trying to access more memory than it 
+	has.
+
+
+List_adding_to_list_adds_to_the_end_of_the_list_correctly
+	Ensures that the list increments it's length by 1 and
+	the element at the `length - 1` spot is correct.
+
+
+	Setup includes creating a list and adding one element
+	and making sure that the list has grown by one element
+	in size and that the element at the end of hte list is 
+	the one added in the first place. Then another 
+	element will be added to the list and the same areas
+	are checked for this element, as well as the length of
+	the list to be 2.
+
+List_deleting_works_as_expected
+	Ensures that the list deletes a specific element
+	from the list, such that the passed in comparision
+	method allows for the specific item to be found.
+
+	Setup includes creating a list and adding two elements 
+	to the list. Then the `delete` method will be called on
+	the list such as to delete the first element by the value
+	using a the comparision function. The result is that the
+	list will be one element shorter and the element that
+	was to be deleted is no longer in the list itself.
+
+Queue_make_sure_that_pop_removes_the_top_element_of_the_list
+	Ensures that the call to the `pop` method will remove the
+	head of the queue and return the data associated with that
+	element.
+
+	Setup includes adding two elements to the queue and
+	subsecuently calling the pop method. Make sure that
+	the returned element is the first one to have been 
+	added to the queue and that the queue is one element
+	shorter.
+
+Queue_make_sure_that_peek_returns_the_top_element_but_does_not_make_the_queue_shorter
+	Ensures that the method `peek` does not effect the queue itself, but
+	only returns the top of the queue's data. 
+
+	Setup incldues adding one element to the queue and then calling 
+	peek and ensuring the list length does not change and that
+	the data returned is the same as what was added.
+
+Make_sure_that_the_fg_works_properly
+	Ensures that when multiple programs are started in the 
+	background that it will pull off the last one to be added
+	this is checked by finding the process with the largest
+	`startedCount`
+
+	Setup includes starting `square` and `sum` in the background
+	in that order. Then typing `fg` to bring `sum` into the
+	foreground. Entering in `5` should output `15`.
+
+Make_sure_that_kill_works_properly_no_parameter
+	Ensures that when the command `kill` is used without a paramter
+	that it will kill the process with the largest `startCount`.
+
+	Setup includes starting `square` and `sum` in the background.
+
+	Then the command `kill` is sent and then the command `jobs` is
+	sent to ensure that the `sum` process is not there.

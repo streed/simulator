@@ -1,0 +1,14 @@
+To run the simulator the following command should be used:
+
+	make sim;./sim <some program>
+
+To run the tests the following command should be used:
+
+	make test;./test
+
+To see a description of the tests then read Tests
+
+To run the new version that forks the process then the following
+command should be used:
+
+	make fork;./fork
